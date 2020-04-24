@@ -6,7 +6,7 @@ import BurgerIngredient from './BurgerIngredient/BurgerIngredient';
 const Burger = (props) => {
     // need to change the props object into an Array
     // Then also duplicate as many of the keys as they have number values('cheese: 2') = two cheeses
-    const transformedIngredients = Object.keys(props.ingredients)
+    let transformedIngredients = Object.keys(props.ingredients)
         .map(
             (igKey) => {
                 //return a copy, array that holds as many keys given by props
@@ -24,6 +24,9 @@ const Burger = (props) => {
             return arr.concat(el);
         }, []);
     // now we can check if the transformedIngredients array is zero and send a message
+    if (transformedIngredients.length === 0) {
+        transformedIngredients = <p>Please Start adding Ingredients</p>;
+    }
     console.log(transformedIngredients);
     // we always have a bread top and bottom? so no Protein style option?
     return (
