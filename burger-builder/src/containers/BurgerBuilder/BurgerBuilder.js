@@ -15,10 +15,10 @@ class BurgerBuilder extends Component {
     // start with hard coding a state object that has needed ingredients
     state = {
         ingredients: {
-            salad: 1,
-            bacon: 1,
+            salad: 0,
+            bacon: 0,
             cheese: 2,
-            meat: 2,
+            meat: 0,
         },
     };
     render() {
