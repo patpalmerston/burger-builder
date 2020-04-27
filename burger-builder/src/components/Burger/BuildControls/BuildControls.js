@@ -19,6 +19,8 @@ const BuildControls = (props) => {
                     label={ctrl.label}
                     // need to pass the type to the ingredient, but need es6 function and pass back the loop of ctrl type, the function takes a 'type' as an argument
                     added={() => props.ingredientAdded(ctrl.type)}
+                    // hook up the removed ingredient function to buildcontrols and then activate button
+                    removed={() => props.ingredientRemove(ctrl.type)}
                 />
             ))}
         </div>
