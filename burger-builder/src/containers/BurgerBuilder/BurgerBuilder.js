@@ -30,7 +30,22 @@ class BurgerBuilder extends Component {
         },
         // keep track of original price
         totalPrice: 4,
+        // this new boolean becomes true once we have atleast one item on the burger
+        purchasable: false,
     };
+
+    // use this method to check wether we should change purchasable to true or false
+    updatePurchaseState(ingredients) {
+        // turn object keys into an array to add together
+        const sum = Object.keys(ingredients)
+            .map((igKey) => {
+                return ingredients[igKey];
+            })
+            .reduce((sum, el) => {
+                return sum + el;
+            }, 0);
+        this.setState({ purchasable: sum > 0 });
+    }
 
     addIngredientHandler = (type) => {
         // need to know what old ingredient count it, for given type
@@ -55,6 +70,7 @@ class BurgerBuilder extends Component {
             totalPrice: newPrice,
             ingredients: updatedIngredients,
         });
+        this.updatePurchaseState(updatedIngredients);
     };
 
     removeIngredientHandler = (type) => {
@@ -84,6 +100,7 @@ class BurgerBuilder extends Component {
             totalPrice: newPrice,
             ingredients: updatedIngredients,
         });
+        this.updatePurchaseState(updatedIngredients);
     };
 
     render() {
@@ -102,6 +119,7 @@ class BurgerBuilder extends Component {
                     ingredientAdded={this.addIngredientHandler}
                     ingredientRemove={this.removeIngredientHandler}
                     disabled={disabledInfo}
+                    purchasable={this.state.purchasable}
                     price={this.state.totalPrice}
                 />
             </Aux>
