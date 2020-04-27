@@ -21,6 +21,7 @@ const BuildControls = (props) => {
                     added={() => props.ingredientAdded(ctrl.type)}
                     // hook up the removed ingredient function to buildcontrols and then activate button
                     removed={() => props.ingredientRemove(ctrl.type)}
+                    disabled={props.disabled[ctrl.type]}
                 />
             ))}
         </div>

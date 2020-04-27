@@ -60,6 +60,10 @@ class BurgerBuilder extends Component {
     removeIngredientHandler = (type) => {
         // need to know what old ingredient count it, for given type
         const oldCount = this.state.ingredients[type];
+        // we need to check to make sure we dont get negative ingredients
+        if (oldCount <= 0) {
+            return;
+        }
         // calculate oldCount minus one for the new count
         const updatedCount = oldCount - 1;
         // state updated in immutable way by creating a copy of old state in new variable to be manipulated
@@ -83,12 +87,20 @@ class BurgerBuilder extends Component {
     };
 
     render() {
+        // copy state in an immutable way
+        const disabledInfo = {
+            ...this.state.ingredients,
+        };
+        for (let key in disabledInfo) {
+            disabledInfo[key] = disabledInfo[key] <= 0;
+        }
         return (
             <Aux>
                 <Burger ingredients={this.state.ingredients} />
                 <BuildControls
                     ingredientAdded={this.addIngredientHandler}
                     ingredientRemove={this.removeIngredientHandler}
+                    disabled={disabledInfo}
                 />
             </Aux>
         );
