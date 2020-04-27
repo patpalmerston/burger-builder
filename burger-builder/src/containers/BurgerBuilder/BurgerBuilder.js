@@ -60,7 +60,7 @@ class BurgerBuilder extends Component {
     removeIngredientHandler = (type) => {
         // need to know what old ingredient count it, for given type
         const oldCount = this.state.ingredients[type];
-        // we need to check to make sure we dont get negative ingredients
+        // if we have 0 ingredients of that type and we click it will just return as is, nothing happens getting rid of the error
         if (oldCount <= 0) {
             return;
         }
@@ -91,6 +91,7 @@ class BurgerBuilder extends Component {
         const disabledInfo = {
             ...this.state.ingredients,
         };
+        // turning disabledInfro into a boolean value that we disable the button from for styling purposes
         for (let key in disabledInfo) {
             disabledInfo[key] = disabledInfo[key] <= 0;
         }
@@ -101,6 +102,7 @@ class BurgerBuilder extends Component {
                     ingredientAdded={this.addIngredientHandler}
                     ingredientRemove={this.removeIngredientHandler}
                     disabled={disabledInfo}
+                    price={this.state.totalPrice}
                 />
             </Aux>
         );
