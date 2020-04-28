@@ -29,6 +29,7 @@ const BuildControls = (props) => {
             ))}
             <button
                 className={classes.OrderButton}
+                // should only be set to true if the order is not purchasable
                 disabled={!props.purchasable}
             >
                 ORDER NOW
