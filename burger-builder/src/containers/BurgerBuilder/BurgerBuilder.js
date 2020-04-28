@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import Aux from '../../hoc/Auxillary';
 import Burger from '../../components/Burger/Burger';
 import BuildControls from '../../components/Burger/BuildControls/BuildControls';
+import Modal from '../../components/UI/Modal/Modal';
+import OrderSummary from '../../components/Burger/OrderSummary/OrderSummary';
 
 // this is a global variable so we call it outside of the component, global variable are usually all uppercase
 const INGREDIENT_PRICES = {
@@ -114,6 +116,9 @@ class BurgerBuilder extends Component {
         }
         return (
             <Aux>
+                <Modal>
+                    <OrderSummary ingredients={this.state.ingredients} />
+                </Modal>
                 <Burger ingredients={this.state.ingredients} />
                 <BuildControls
                     ingredientAdded={this.addIngredientHandler}
