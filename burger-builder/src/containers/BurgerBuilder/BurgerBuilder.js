@@ -34,6 +34,7 @@ class BurgerBuilder extends Component {
         totalPrice: 4,
         // this new boolean becomes true once we have atleast one item on the burger
         purchasable: false,
+        purchasing: false,
     };
 
     // use this method to check wether we should change purchasable to true or false
@@ -105,6 +106,11 @@ class BurgerBuilder extends Component {
         this.updatePurchaseState(updatedIngredients);
     };
 
+    // need to access the boolean to switch from true to false on the click of the order button
+    purchaseHandler = () => {
+        this.setState({ purchasing: true });
+    };
+
     render() {
         // copy state in an immutable way
         const disabledInfo = {
@@ -116,7 +122,7 @@ class BurgerBuilder extends Component {
         }
         return (
             <Aux>
-                <Modal>
+                <Modal show={this.state.purchasing}>
                     <OrderSummary ingredients={this.state.ingredients} />
                 </Modal>
                 <Burger ingredients={this.state.ingredients} />
@@ -126,6 +132,7 @@ class BurgerBuilder extends Component {
                     disabled={disabledInfo}
                     purchasable={this.state.purchasable}
                     price={this.state.totalPrice}
+                    ordered={this.purchaseHandler}
                 />
             </Aux>
         );
