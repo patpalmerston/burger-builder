@@ -1,7 +1,7 @@
 import React from 'react';
 import Aux from '../../../hoc/Auxillary';
 import Button from '../../UI/Button/Button';
-//order summary
+//order summary component
 const OrderSummary = (props) => {
     const ingredientSummary = Object.keys(props.ingredients).map((igKey) => {
         return (
