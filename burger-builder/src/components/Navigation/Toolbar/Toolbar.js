@@ -4,6 +4,7 @@ import Logo from '../../Logo/Logo';
 import NavigationItems from '../NavigationItems/NavigationItems';
 const toolbar = () => (
     <header className={classes.Toolbar}>
+    // menu to be changed
         <div>Menu</div>
         <div className={classes.Logo}>
             <Logo />
