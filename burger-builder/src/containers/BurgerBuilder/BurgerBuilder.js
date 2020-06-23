@@ -4,6 +4,7 @@ import Burger from '../../components/Burger/Burger';
 import BuildControls from '../../components/Burger/BuildControls/BuildControls';
 import Modal from '../../components/UI/Modal/Modal';
 import OrderSummary from '../../components/Burger/OrderSummary/OrderSummary';
+import axios from '../../axios-orders';
 
 // this is a global variable so we call it outside of the component, global variable are usually all uppercase
 const INGREDIENT_PRICES = {
@@ -116,7 +117,26 @@ class BurgerBuilder extends Component {
     };
 
     purchaseContinueHandler = () => {
-        alert('you Continue');
+        // alert('you Continue');
+        const order = {
+            ingredients: this.state.ingredients,
+            // recalculate price on the server at some point
+            price: this.state.totalPrice,
+            customer: {
+                name: 'Pat Palmerston',
+                address: {
+                    street: 'TestStreet 1',
+                    zipCode: '3432434',
+                    country: 'ala',
+                },
+                email: 'test@test.com',
+            },
+            deliveryMethod: 'fastest',
+        };
+        axios
+            .post('/orders.json', order)
+            .then((res) => console.log(res))
+            .catch((err) => console.log(err));
     };
 
     render() {
