@@ -34,6 +34,7 @@ class BurgerBuilder extends Component {
         purchasable: false,
         purchasing: false,
         loading: false,
+        error: false,
     };
 
     componentDidMount() {
@@ -44,7 +45,10 @@ class BurgerBuilder extends Component {
             .then((res) => {
                 this.setState({ ingredients: res.data });
             })
-            .catch();
+            .catch((err) => {
+                console.log(err);
+                this.setState({ error: true });
+            });
     }
 
     // use this method to check wether we should change purchasable to true or false
@@ -164,7 +168,11 @@ class BurgerBuilder extends Component {
         }
         let orderSummary = null;
 
-        let burger = <Spinner />;
+        let burger = this.state.error ? (
+            <p>Ingredients cant be Loaded!</p>
+        ) : (
+            <Spinner />
+        );
         if (this.state.ingredients) {
             burger = (
                 <Aux>
